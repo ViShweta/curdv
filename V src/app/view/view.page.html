@@ -1,0 +1,35 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> <b>List</b></ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list style="margin-top:20px">
+    <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+      <ion-item *ngFor="let users of results  ; index as i  "  [id]="users.id">
+        <ion-label>
+          {{users.userName}}
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+        <ion-label>
+          {{users.email}}
+        </ion-label>
+        <ion-label>
+          {{users.phone}}
+        </ion-label>
+        <ion-text slot="end">
+          <ion-icon color="danger" name="trash" (click)="clearData(i)"></ion-icon>
+          <button ion-button [routerLink]="['/edit',i]">
+            <ion-icon color="dark" name="create"></ion-icon>
+          </button>
+        </ion-text>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+</ion-content>
